@@ -105,26 +105,34 @@ class EventController extends Controller
                     if ($weekday == 'Monday' && $repeatWeek == 1) {
                         array_push($total_dates, $Date);
                         array_push($total_days, date('l', $x));
+                        break;
                     } elseif ($weekday == 'Tuesday' && $repeatWeek == 2) {
                         array_push($total_dates, $Date);
                         array_push($total_days, date('l', $x));
+                        break;
                     } elseif ($weekday == 'Wednesday' && $repeatWeek == 3) {
                         array_push($total_dates, $Date);
                         array_push($total_days, date('l', $x));
+                        break;
                     } elseif ($weekday == 'Thusday' && $repeatWeek == 4) {
                         array_push($total_dates, $Date);
                         array_push($total_days, date('l', $x));
+                        break;
                     } elseif ($weekday == 'Friday' && $repeatWeek == 5) {
                         array_push($total_dates, $Date);
                         array_push($total_days, date('l', $x));
+                        break;
                     } elseif ($weekday == 'Saturday' && $repeatWeek == 6) {
                         array_push($total_dates, $Date);
                         array_push($total_days, date('l', $x));
+                        break;
                     } elseif ($weekday == 'Sunday' && $repeatWeek == 0) {
                         array_push($total_dates, $Date);
                         array_push($total_days, date('l', $x));
+                        break;
                     }
                 }
+                dd($every_mon);
             }
         }
         return view('view_event', compact('event', 'total_days', 'total_dates'));
