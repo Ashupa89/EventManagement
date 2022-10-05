@@ -81,6 +81,7 @@ class EventController extends Controller
         $end_date = $event->end_date;
         $total_dates = array();
         $total_days = array();
+        $every_mon = [];
         if ($event->recurrence == 1) {
             $repeat = $event->repeat;
             $every = $event->every;
@@ -95,13 +96,43 @@ class EventController extends Controller
             $repeatOn = $event->repeatOn;
             $repeatWeek = $event->repeatWeek;
             $repeatMonth = $event->repeatMonth;
+            if ($repeatMonth == 1) {
+                for ($x = strtotime($start_date); $x <= strtotime($end_date); $x += 86400) {
+                    array_push($every_mon, date('Y-m-d', $x));
+                }
+                foreach ($every_mon as $Date) {
+                    $weekday = date('l', strtotime($Date));
+                    if ($weekday == 'Monday' && $repeatWeek == 1) {
+                        array_push($total_dates, $Date);
+                        array_push($total_days, date('l', $x));
+                    } elseif ($weekday == 'Tuesday' && $repeatWeek == 2) {
+                        array_push($total_dates, $Date);
+                        array_push($total_days, date('l', $x));
+                    } elseif ($weekday == 'Wednesday' && $repeatWeek == 3) {
+                        array_push($total_dates, $Date);
+                        array_push($total_days, date('l', $x));
+                    } elseif ($weekday == 'Thusday' && $repeatWeek == 4) {
+                        array_push($total_dates, $Date);
+                        array_push($total_days, date('l', $x));
+                    } elseif ($weekday == 'Friday' && $repeatWeek == 5) {
+                        array_push($total_dates, $Date);
+                        array_push($total_days, date('l', $x));
+                    } elseif ($weekday == 'Saturday' && $repeatWeek == 6) {
+                        array_push($total_dates, $Date);
+                        array_push($total_days, date('l', $x));
+                    } elseif ($weekday == 'Sunday' && $repeatWeek == 0) {
+                        array_push($total_dates, $Date);
+                        array_push($total_days, date('l', $x));
+                    }
+                }
+            }
         }
         return view('view_event', compact('event', 'total_days', 'total_dates'));
     }
 
     public function deleteEvent(Event $event)
     {
-//        $event->delete();
+        $event->delete();
         return redirect('event-list')->with('message', 'Event Deleted SuccessFully');
     }
 }
