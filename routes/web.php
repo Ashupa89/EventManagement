@@ -14,5 +14,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('add_event');
 });
+Route::post('add-event', [\App\Http\Controllers\EventController::class, 'createEvent']);
+Route::post('update-event/{id}', [\App\Http\Controllers\EventController::class, 'updateEvent']);
+Route::get('event-list', [\App\Http\Controllers\EventController::class, 'index']);
+Route::get('edit-event/{event}', [\App\Http\Controllers\EventController::class, 'editEvent']);
+Route::get('view-event/{event}', [\App\Http\Controllers\EventController::class, 'viewEvent']);
