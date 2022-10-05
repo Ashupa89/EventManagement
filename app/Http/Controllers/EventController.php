@@ -132,7 +132,7 @@ class EventController extends Controller
                         break;
                     }
                 }
-                dd($every_mon);
+
             }
         }
         return view('view_event', compact('event', 'total_days', 'total_dates'));
