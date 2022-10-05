@@ -18,26 +18,21 @@ class EventController extends Controller
         $input = $request->all();
 
         if ($input['recurrenceType'] == 1) {
-//            $request->validate([
-//                "repeat" => "required",
-//                "every" => "required"
-//            ]);
+
             $input['repeatOn'] = null;
             $input['repeatWeek'] = null;
             $input['repeatMonth'] = null;
 
         } else if ($input['recurrenceType'] == 2) {
-//            $request->validate([
-//                "repeatOn" => "required",
-//                "repeatWeek" => "required",
-//                "repeatMonth" => "required"
-//            ]);
+
             $input['repeat'] = null;
             $input['every'] = null;
         }
         $input['recurrence'] = $input['recurrenceType'];
 
         $event = Event::create($input);
+        return redirect('event_list')->with('message', 'Event Created SuccessFully');
+
     }
 
     public function index(Request $request)
@@ -62,20 +57,13 @@ class EventController extends Controller
         $input = $request->all();
 
         if ($input['recurrenceType'] == 1) {
-//            $request->validate([
-//                "repeat" => "required",
-//                "every" => "required"
-//            ]);
+
             $input['repeatOn'] = null;
             $input['repeatWeek'] = null;
             $input['repeatMonth'] = null;
 
         } else if ($input['recurrenceType'] == 2) {
-//            $request->validate([
-//                "repeatOn" => "required",
-//                "repeatWeek" => "required",
-//                "repeatMonth" => "required"
-//            ]);
+
             $input['repeat'] = null;
             $input['every'] = null;
         }
@@ -83,6 +71,8 @@ class EventController extends Controller
         unset($input['_token']);
         unset($input['recurrenceType']);
         $event = Event::where('id', $id)->update($input);
+        return redirect('event_list')->with('message', 'Event Updated SuccessFully');
+
     }
 
     public function viewEvent(Event $event)
@@ -107,5 +97,11 @@ class EventController extends Controller
             $repeatMonth = $event->repeatMonth;
         }
         return view('view_event', compact('event', 'total_days', 'total_dates'));
+    }
+
+    public function deleteEvent(Event $event)
+    {
+//        $event->delete();
+        return redirect('event-list')->with('message', 'Event Deleted SuccessFully');
     }
 }

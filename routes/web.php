@@ -21,3 +21,4 @@ Route::post('update-event/{id}', [\App\Http\Controllers\EventController::class, 
 Route::get('event-list', [\App\Http\Controllers\EventController::class, 'index']);
 Route::get('edit-event/{event}', [\App\Http\Controllers\EventController::class, 'editEvent']);
 Route::get('view-event/{event}', [\App\Http\Controllers\EventController::class, 'viewEvent']);
+Route::get('delete-event/{event}', [\App\Http\Controllers\EventController::class, 'deleteEvent']);

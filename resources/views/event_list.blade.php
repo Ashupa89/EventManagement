@@ -7,7 +7,9 @@
                 <div class="panel-heading">
                     Event List
                 </div>
-
+                @if(Session::has('message'))
+                    <p class="alert alert-info">{{ Session::get('message') }}</p>
+                @endif
                 <div class="panel-body">
                     <table>
                         <tbody>
@@ -64,7 +66,7 @@
                                 <td>
                                     <a href="{{url('view-event/'.$event->id)}}" class="btn btn-primary">View</a>
                                     <a href="{{url('edit-event/'.$event->id)}}" class="btn btn-success">Edit</a>
-                                    <button class="btn btn-danger">Delete</button>
+                                    <a href="{{url('delete-event/'.$event->id)}}" class="btn btn-danger">Delete</a>
                                 </td>
                             </tr>
                             </tbody>
